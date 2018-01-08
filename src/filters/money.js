@@ -1,5 +1,5 @@
-export default value => {
-  const formattedValue = Array.from(value.toString())
+export default value =>
+  Array.from(value.toString())
     .reverse()
     .reduce((accumulator, current, index) => {
       accumulator.unshift(current);
@@ -9,6 +9,3 @@ export default value => {
       return accumulator;
     }, [])
     .join('');
-
-  return `$${formattedValue}`;
-};

@@ -11,7 +11,7 @@
                 div.navbar-end
                     div.navbar-item Funds:
                         | &nbsp;
-                        strong.has-text-white {{ funds | money }}
+                        strong.has-text-white ${{ funds | money }}
 </template>
 
 <script>
