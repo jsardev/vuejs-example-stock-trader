@@ -1,7 +1,8 @@
 <template lang="pug">
     div
         app-header
-        router-view
+        transition(name="fade" mode="out-in")
+            router-view
 </template>
 
 <script>
@@ -13,3 +14,17 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.fade-enter {
+    opacity: 0;
+}
+.fade-enter-active {
+    transition: opacity 0.5s;
+}
+
+.fade-leave-active {
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+</style>

@@ -1,3 +1,4 @@
+// TODO: refactor it somehow, looks bad
 <template lang="pug">
     div.card
         div.card-content
@@ -8,7 +9,7 @@
                 div.level-right
                     div.level-item(v-if="quantity")
                         div.tag.is-info.is-large {{ quantity }}
-                    div.level-item
+                    div.level-item(ref="price")
                         div.tag.is-success.is-large ${{ price }}
                         //- TODO: add switching between success/danger based on previous value
         div.card-footer
@@ -66,6 +67,18 @@ export default {
             return this.actionType == actionTypes.BUY
                 ? 'Buy'
                 : this.actionType == actionTypes.SELL ? 'Sell' : 'Action';
+        }
+    },
+    watch: {
+        // TODO: how to do this better?
+        price() {
+            this.$refs.price.classList.add('animated');
+            this.$refs.price.classList.add('shake');
+
+            setTimeout(() => {
+                this.$refs.price.classList.remove('animated');
+                this.$refs.price.classList.remove('shake');
+            }, 1000);
         }
     },
     filters: {
