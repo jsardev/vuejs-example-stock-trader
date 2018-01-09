@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import random from 'lodash/random';
 
 Vue.use(Vuex);
 
@@ -31,7 +32,7 @@ export default new Vuex.Store({
   mutations: {
     buy(state, payload) {
       const asset = state.portfolio.find(asset => asset.name === payload.name);
-      const stock = state.stocks.find(asset => asset.name === payload.name);
+      const stock = state.stocks.find(stock => stock.name === payload.name);
 
       const cost = stock.price * payload.quantity;
 
@@ -40,7 +41,7 @@ export default new Vuex.Store({
     },
     sell(state, payload) {
       const asset = state.portfolio.find(asset => asset.name === payload.name);
-      const stock = state.stocks.find(asset => asset.name === payload.name);
+      const stock = state.stocks.find(stock => stock.name === payload.name);
 
       const cost = stock.price * payload.quantity;
 
@@ -49,6 +50,10 @@ export default new Vuex.Store({
     },
     endDay(state) {
       state.day++;
+      state.stocks = state.stocks.map(stock => {
+        stock.price = random(15, 100);
+        return stock;
+      });
     }
   },
   actions: {
