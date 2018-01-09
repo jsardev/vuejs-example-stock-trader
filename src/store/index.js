@@ -30,10 +30,10 @@ export default new Vuex.Store({
       const portfolioAsset = state.portfolio.find(asset => asset.name === payload.name);
       const stockAsset = state.stocks.find(stock => stock.name === payload.name);
 
-      const cost = stockAsset.price * Number(payload.quantity);
+      const cost = stockAsset.price * payload.quantity;
 
       if (portfolioAsset) {
-        portfolioAsset.quantity += Number(payload.quantity);
+        portfolioAsset.quantity += payload.quantity;
       } else {
         state.portfolio.push({
           name: stockAsset.name,
@@ -47,13 +47,13 @@ export default new Vuex.Store({
       const portfolioAsset = state.portfolio.find(asset => asset.name === payload.name);
       const stockAsset = state.stocks.find(stock => stock.name === payload.name);
 
-      const revenue = stockAsset.price * Number(payload.quantity);
+      const revenue = stockAsset.price * payload.quantity;
 
-      if (portfolioAsset.quantity - Number(payload.quantity) === 0) {
+      if (portfolioAsset.quantity - payload.quantity === 0) {
         const assetIndex = state.portfolio.indexOf(portfolioAsset);
         state.portfolio.splice(assetIndex, 1);
       } else {
-        portfolioAsset.quantity -= Number(payload.quantity);
+        portfolioAsset.quantity -= payload.quantity;
       }
 
       state.funds += revenue;

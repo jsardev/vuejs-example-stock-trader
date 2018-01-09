@@ -100,14 +100,9 @@ export default {
                 this.$v.calculatedPrice.$touch();
             }
 
-            console.log({
-                name: this.name,
-                quantity: this.quantityForAction
-            })
-
             this.action({
                 name: this.name,
-                quantity: this.quantityForAction
+                quantity: Number(this.quantityForAction)
             });
         }
     },
