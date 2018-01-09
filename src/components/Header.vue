@@ -13,7 +13,7 @@
                         | &nbsp;
                         strong.has-text-white {{ day }}
                     div.navbar-item 
-                        button.button(@click="endDay") End Day
+                        button.button(@click="endday") End Day
                     div.navbar-item Funds:
                         | &nbsp;
                         strong.has-text-white ${{ funds | money }}
@@ -28,7 +28,7 @@ export default {
         ...mapState(['funds', 'day'])
     },
     methods: {
-        ...mapActions(['endDay'])
+        ...mapActions(['endday'])
     },
     filters: {
         money

@@ -21,7 +21,7 @@
                         @input="$v.quantityForAction.$touch",
                         :class="{ 'is-danger': isInvalid }"
                     )
-            div.card-footer-item 
+            div.card-footer-item
                 strong(:class="{ 'has-text-danger': isCalculatedPriceInvalid }") ${{ calculatedPrice | money }}
             div.card-footer-item
                 button.button(
@@ -80,8 +80,7 @@ export default {
             type: Number
         },
         price: {
-            type: Number,
-            required: true
+            type: Number
         },
         actionType: {
             type: String,

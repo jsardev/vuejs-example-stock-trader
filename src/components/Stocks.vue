@@ -3,7 +3,7 @@
         div.container
             h2.title Stocks
             div.columns
-                div.column.is-one-third(v-for="asset in stocks")
+                div.column.is-one-third(v-for="asset in items")
                     asset(
                         :name="asset.name", 
                         :price="asset.price", 
@@ -25,10 +25,10 @@ export default {
         };
     },
     computed: {
-        ...mapState(['stocks'])
+        ...mapState('stock', ['items'])
     },
     methods: {
-        ...mapActions(['buy'])
+        ...mapActions('stock', ['buy'])
     },
     components: {
         Asset

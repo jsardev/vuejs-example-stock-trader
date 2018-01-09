@@ -2,14 +2,14 @@
     div.section
         div.container
             h2.title Portfolio
-            div(v-if="portfolio.length === 0")
+            div(v-if="items.length === 0")
                 div.content
                     p 
                         | You have no shares right now. Buy some on the 
                         router-link(to="/stocks") market.
             div(v-else)
                 div.columns
-                    div.column.is-one-third(v-for="asset in portfolio")
+                    div.column.is-one-third(v-for="asset in items")
                         asset(
                             :name="asset.name", 
                             :quantity="asset.quantity", 
@@ -32,10 +32,10 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(['portfolio'])
+        ...mapGetters('portfolio', ['items'])
     },
     methods: {
-        ...mapActions(['sell'])
+        ...mapActions('stock', ['sell'])
     },
     components: {
         Asset
