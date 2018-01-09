@@ -1,16 +1,16 @@
 <template lang="pug">
     div.card
         div.card-content
-                div.level
-                    div.level-left
-                        div.level-item
-                            h3.title.is-4 {{ name }}
-                    div.level-right
-                        div.level-item
-                            div.tag.is-info.is-large {{ quantity }}
-                        div.level-item
-                            div.tag.is-success.is-large ${{ price }}
-                            //- TODO: add switching between success/danger based on previous value
+            div.level
+                div.level-left
+                    div.level-item
+                        h3.title.is-4 {{ name }}
+                div.level-right
+                    div.level-item(v-if="quantity")
+                        div.tag.is-info.is-large {{ quantity }}
+                    div.level-item
+                        div.tag.is-success.is-large ${{ price }}
+                        //- TODO: add switching between success/danger based on previous value
         div.card-footer
             div.card-footer-item
                 div.control

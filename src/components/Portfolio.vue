@@ -2,10 +2,11 @@
     div.section
         div.container
             h2.title Portfolio
-            div.content(v-if="portfolio.length === 0")
-                p 
-                    | You have no shares right now. Buy some on the 
-                    router-link(to="/stocks") market.
+            div(v-if="portfolio.length === 0")
+                div.content
+                    p 
+                        | You have no shares right now. Buy some on the 
+                        router-link(to="/stocks") market.
             div(v-else)
                 div.columns
                     div.column.is-one-third(v-for="asset in portfolio")
@@ -20,12 +21,12 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import Asset from './Asset.vue';
 
 export default {
     computed: {
-        ...mapState(['portfolio'])
+        ...mapGetters(['portfolio'])
     },
     methods: {
         ...mapActions(['sell'])
