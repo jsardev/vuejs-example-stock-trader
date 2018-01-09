@@ -8,21 +8,30 @@
                     router-link(to="/stocks") market.
             div(v-else)
                 div.columns
-                    div.column.is-one-third(v-for="share in portfolio")
-                        portfolio-item(:share="share")
+                    div.column.is-one-third(v-for="asset in portfolio")
+                        asset(
+                            :name="asset.name", 
+                            :quantity="asset.quantity", 
+                            :price="asset.price", 
+                            :actionName="'Sell'"
+                            :action="sell"
+                        )
                             
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import PortfolioItem from './PortfolioItem.vue';
+import { mapState, mapActions } from 'vuex';
+import Asset from './Asset.vue';
 
 export default {
     computed: {
         ...mapState(['portfolio'])
     },
+    methods: {
+        ...mapActions(['sell'])
+    },
     components: {
-        PortfolioItem
+        Asset
     }
 };
 </script>

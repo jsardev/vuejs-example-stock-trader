@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+// TODO: try to make this immutable
 export default new Vuex.Store({
   state: {
     funds: 10000,
@@ -13,5 +14,25 @@ export default new Vuex.Store({
       { name: 'Oracle', quantity: 10, price: 50 }
     ],
     stocks: []
+  },
+  mutations: {
+    buy(state, payload) {
+      const asset = state.portfolio.find(asset => asset.name === payload.name);
+      const cost = asset.price * payload.quantity;
+
+      asset.quantity += payload.quantity;
+      state.funds -= cost;
+    },
+    sell(state, payload) {
+      const asset = state.portfolio.find(asset => asset.name === payload.name);
+      const cost = asset.price * payload.quantity;
+
+      asset.quantity -= payload.quantity;
+      state.funds += cost;
+    }
+  },
+  actions: {
+    buy: ({ commit }, action) => commit('buy', action),
+    sell: ({ commit }, action) => commit('sell', action)
   }
 });
