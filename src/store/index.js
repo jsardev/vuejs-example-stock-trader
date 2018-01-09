@@ -10,11 +10,7 @@ export default new Vuex.Store({
     day: 1,
     funds: 10000,
     // TODO: replace this with generated data
-    portfolio: [
-      { name: 'Apple', quantity: 10 },
-      { name: 'Microsoft', quantity: 10 },
-      { name: 'Oracle', quantity: 10 }
-    ],
+    portfolio: [],
     stocks: [
       { name: 'Apple', price: 25 },
       { name: 'Microsoft', price: 15 },
@@ -31,29 +27,43 @@ export default new Vuex.Store({
   },
   mutations: {
     buy(state, payload) {
-      const asset = state.portfolio.find(asset => asset.name === payload.name);
-      const stock = state.stocks.find(stock => stock.name === payload.name);
+      const portfolioAsset = state.portfolio.find(asset => asset.name === payload.name);
+      const stockAsset = state.stocks.find(stock => stock.name === payload.name);
 
-      const cost = stock.price * payload.quantity;
+      const cost = stockAsset.price * Number(payload.quantity);
 
-      asset.quantity += payload.quantity;
+      if (portfolioAsset) {
+        portfolioAsset.quantity += Number(payload.quantity);
+      } else {
+        state.portfolio.push({
+          name: stockAsset.name,
+          quantity: payload.quantity
+        });
+      }
+
       state.funds -= cost;
     },
     sell(state, payload) {
-      const asset = state.portfolio.find(asset => asset.name === payload.name);
-      const stock = state.stocks.find(stock => stock.name === payload.name);
+      const portfolioAsset = state.portfolio.find(asset => asset.name === payload.name);
+      const stockAsset = state.stocks.find(stock => stock.name === payload.name);
 
-      const cost = stock.price * payload.quantity;
+      const revenue = stockAsset.price * Number(payload.quantity);
 
-      asset.quantity -= payload.quantity;
-      state.funds += cost;
+      if (portfolioAsset.quantity - Number(payload.quantity) === 0) {
+        const assetIndex = state.portfolio.indexOf(portfolioAsset);
+        state.portfolio.splice(assetIndex, 1);
+      } else {
+        portfolioAsset.quantity -= Number(payload.quantity);
+      }
+
+      state.funds += revenue;
     },
     endDay(state) {
       state.day++;
-      state.stocks = state.stocks.map(stock => {
-        stock.price = random(15, 100);
-        return stock;
-      });
+      state.stocks = state.stocks.map(stock => ({
+        ...stock,
+        price: random(15, 100)
+      }));
     }
   },
   actions: {

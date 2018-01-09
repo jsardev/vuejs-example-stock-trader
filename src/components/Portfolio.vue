@@ -14,17 +14,23 @@
                             :name="asset.name", 
                             :quantity="asset.quantity", 
                             :price="asset.price", 
-                            :actionName="'Sell'"
+                            :actionType="availableAction"
                             :action="sell"
                         )
-                            
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+
 import Asset from './Asset.vue';
+import actionTypes from './actionTypes';
 
 export default {
+    data() {
+        return {
+            availableAction: actionTypes.SELL
+        };
+    },
     computed: {
         ...mapGetters(['portfolio'])
     },

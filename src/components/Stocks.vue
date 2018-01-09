@@ -7,16 +7,23 @@
                     asset(
                         :name="asset.name", 
                         :price="asset.price", 
-                        :actionName="'Buy'"
+                        :actionType="availableAction"
                         :action="buy"
                     )
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
+
 import Asset from './Asset.vue';
+import actionTypes from './actionTypes';
 
 export default {
+    data() {
+        return {
+            availableAction: actionTypes.BUY
+        };
+    },
     computed: {
         ...mapState(['stocks'])
     },
