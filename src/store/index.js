@@ -6,6 +6,7 @@ Vue.use(Vuex);
 // TODO: try to make this immutable
 export default new Vuex.Store({
   state: {
+    day: 1,
     funds: 10000,
     // TODO: replace this with generated data
     portfolio: [
@@ -45,10 +46,14 @@ export default new Vuex.Store({
 
       asset.quantity -= payload.quantity;
       state.funds += cost;
+    },
+    endDay(state) {
+      state.day++;
     }
   },
   actions: {
     buy: ({ commit }, action) => commit('buy', action),
-    sell: ({ commit }, action) => commit('sell', action)
+    sell: ({ commit }, action) => commit('sell', action),
+    endDay: ({ commit }) => commit('endDay')
   }
 });

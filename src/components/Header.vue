@@ -9,18 +9,26 @@
                     router-link(to="/portfolio" class="navbar-item") Portfolio
                     router-link(to="/stocks" class="navbar-item") Stocks
                 div.navbar-end
+                    div.navbar-item Day:
+                        | &nbsp;
+                        strong.has-text-white {{ day }}
+                    div.navbar-item 
+                        button.button(@click="endDay") End Day
                     div.navbar-item Funds:
                         | &nbsp;
                         strong.has-text-white ${{ funds | money }}
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import money from '../filters/money';
 
 export default {
     computed: {
-        ...mapState(['funds'])
+        ...mapState(['funds', 'day'])
+    },
+    methods: {
+        ...mapActions(['endDay'])
     },
     filters: {
         money
