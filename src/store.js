@@ -8,7 +8,6 @@ import persistence from './modules/persistence';
 
 Vue.use(Vuex);
 
-// TODO: try to make this immutable
 export default new Vuex.Store({
   modules: {
     app,

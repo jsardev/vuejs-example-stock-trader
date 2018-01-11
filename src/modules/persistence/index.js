@@ -1,5 +1,6 @@
 import mutations from './mutations';
 import actions from './actions';
+import './api';
 
 import PersistenceNavItem from './components/PersistenceNavItem';
 import SaveModal from './components/SaveModal';

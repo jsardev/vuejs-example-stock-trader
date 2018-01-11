@@ -1,16 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import VueResource from 'vue-resource';
-import App from './App.vue';
 
 import './directives';
 import routes from './routes';
 import store from './store';
 
-Vue.use(VueRouter);
-Vue.use(VueResource);
+import App from './App.vue';
 
-Vue.http.options.root = 'https://vuejs-stock-trader-23217.firebaseio.com';
+Vue.use(VueRouter);
 
 const router = new VueRouter({
   routes,

@@ -3,7 +3,7 @@
     div.section
         div.container
             h2.title Stocks
-            div.columns
+            div.columns.is-multiline
                 div.column.is-one-third(v-for="asset in items")
                     asset(
                         :name="asset.name", 
@@ -25,13 +25,18 @@ export default {
         };
     },
     computed: {
-        ...mapState('stock', ['items'])
+        ...mapState('stock', ['items', 'initialized'])
     },
     methods: {
-        ...mapActions('stock', ['buy'])
+        ...mapActions('stock', ['buy', 'generateData'])
     },
     components: {
         Asset
+    },
+    beforeMount() {
+        if (!this.initialized) {
+            this.generateData();
+        }
     }
 };
 </script>

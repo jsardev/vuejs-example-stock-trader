@@ -1,5 +1,6 @@
 export default {
   // TODO: handle this duplication
+  generateData: ({ commit }) => commit('generate'),
   buy: ({ commit, getters }, { name, quantity }) => {
     const asset = getters.getByName(name);
     const cost = quantity * asset.price;

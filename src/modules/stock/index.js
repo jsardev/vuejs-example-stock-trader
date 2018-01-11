@@ -5,7 +5,7 @@ import getters from './getters';
 import Stocks from './components/Stocks';
 
 const defaultState = {
-  // TODO: replace this with generated data
+  initialized: false,
   items: [
     { name: 'Apple', price: 25 },
     { name: 'Microsoft', price: 15 },
