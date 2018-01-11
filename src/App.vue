@@ -1,23 +1,29 @@
 <template lang="pug">
     div
-        navigation
-        goal
-        transition(name="fade" mode="out-in")
-            router-view
-        save-modal
-        load-modal
+        div(v-if="!finished")
+            navigation
+            goal
+            transition(name="fade" mode="out-in")
+                router-view
+            save-modal
+            load-modal
+        div(v-if="finished")
+            end
+            
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 
-import { Navigation, Goal } from './modules/app';
+import { Navigation, Goal, End } from './modules/app';
 import { SaveModal, LoadModal } from './modules/persistence';
 
 export default {
+    computed: mapState('app', ['finished']),
     components: {
         Navigation,
         Goal,
+        End,
         SaveModal,
         LoadModal
     }

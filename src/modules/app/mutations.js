@@ -2,11 +2,17 @@ export default {
   state(state, newState) {
     state = Object.assign(state, newState);
   },
-  buy(state, cost) {
-    state.funds -= cost;
+  decreaseFunds(state, amount) {
+    state.funds -= amount;
   },
-  sell(state, revenue) {
-    state.funds += revenue;
+  increaseFunds(state, amount) {
+    state.funds += amount;
+  },
+  updateProgress(state) {
+    state.progress = state.funds / state.goal * 100;
+  },
+  endgame(state) {
+    state.finished = true;
   },
   endday(state) {
     state.day++;

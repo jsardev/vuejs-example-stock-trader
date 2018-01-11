@@ -12,10 +12,7 @@ import money from '../../../filters/money';
 
 export default {
     computed: {
-        ...mapState('app', ['funds', 'goal']),
-        progress() {
-            return this.funds / this.goal * 100;
-        },
+        ...mapState('app', ['funds', 'goal', 'progress']),
         progressClasses() {
             return {
                 'is-danger': this.progress <= 20,
