@@ -30,16 +30,16 @@ import money from '../filters/money';
 export default {
     computed: {
         ...mapState({
-            funds: state => state.global.funds,
-            day: state => state.global.day,
-            isLoadInProgress: state => state.save.loading.inProgress
+            funds: state => state.app.funds,
+            day: state => state.app.day,
+            isLoadInProgress: state => state.persistence.load.inProgress
         })
     },
     methods: {
         ...mapActions({
-            save: 'save/invokeSaveModal',
-            load: 'save/invokeLoadModal',
-            endday: 'global/endday'
+            save: 'persistence/invokeSaveModal',
+            load: 'persistence/invokeLoadModal',
+            endday: 'app/endday'
         })
     },
     filters: {

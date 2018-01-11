@@ -44,16 +44,16 @@ export default {
         };
     },
     computed: mapState({
-        isSaveInProgress: state => state.save.saving.inProgress,
-        showSaveModal: state => state.save.saving.showModal,
-        showLoadModal: state => state.save.loading.showModal,
-        saveItems: state => state.save.loading.items
+        isSaveInProgress: state => state.persistence.save.inProgress,
+        showSaveModal: state => state.persistence.save.showModal,
+        showLoadModal: state => state.persistence.load.showModal,
+        saveItems: state => state.persistence.items
     }),
     methods: mapActions({
-        save: 'save/save',
-        cancelSave: 'save/cancelSave',
-        load: 'save/load',
-        cancelLoad: 'save/cancelLoad'
+        save: 'persistence/save',
+        cancelSave: 'persistence/cancelSave',
+        load: 'persistence/load',
+        cancelLoad: 'persistence/cancelLoad'
     }),
     components: {
         appHeader: Header,
