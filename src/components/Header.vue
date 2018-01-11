@@ -9,6 +9,10 @@
                     router-link(to="/portfolio" class="navbar-item") Portfolio
                     router-link(to="/stocks" class="navbar-item") Stocks
                 div.navbar-end
+                    a.navbar-item
+                        div.buttons
+                            button.button.is-info(@click="save") Save
+                            button.button.is-info(@click="load" :class="{ 'is-loading': isLoadInProgress }") Load
                     div.navbar-item Day:
                         | &nbsp;
                         strong.has-text-white {{ day }}
@@ -25,10 +29,18 @@ import money from '../filters/money';
 
 export default {
     computed: {
-        ...mapState(['funds', 'day'])
+        ...mapState({
+            funds: state => state.global.funds,
+            day: state => state.global.day,
+            isLoadInProgress: state => state.save.loading.inProgress
+        })
     },
     methods: {
-        ...mapActions(['endday'])
+        ...mapActions({
+            save: 'save/invokeSaveModal',
+            load: 'save/invokeLoadModal',
+            endday: 'global/endday'
+        })
     },
     filters: {
         money

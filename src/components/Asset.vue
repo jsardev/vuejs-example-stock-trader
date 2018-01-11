@@ -47,7 +47,9 @@ export default {
         };
     },
     computed: {
-        ...mapState(['funds']),
+        ...mapState({
+            funds: state => state.global.funds
+        }),
         calculatedPrice() {
             return Number(this.price * this.quantityForAction);
         },

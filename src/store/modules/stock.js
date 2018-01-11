@@ -11,6 +11,9 @@ export default {
     ]
   },
   mutations: {
+    state(state, newState) {
+      state = Object.assign(state, newState);
+    },
     endday(state) {
       state.items = state.items.map(stock => ({
         ...stock,
@@ -32,14 +35,14 @@ export default {
       const asset = getters.getByName(name);
       const cost = quantity * asset.price;
 
-      commit('buy', cost, { root: true });
+      commit('global/buy', cost, { root: true });
       commit('portfolio/buy', { ...asset, quantity }, { root: true });
     },
     sell: ({ commit, getters }, { name, quantity }) => {
       const asset = getters.getByName(name);
       const revenue = quantity * asset.price;
 
-      commit('sell', revenue, { root: true });
+      commit('global/sell', revenue, { root: true });
       commit('portfolio/sell', { ...asset, quantity }, { root: true });
     }
   }

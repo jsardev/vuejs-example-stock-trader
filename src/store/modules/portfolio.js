@@ -12,6 +12,9 @@ export default {
     }
   },
   mutations: {
+    state(state, newState) {
+      state = Object.assign(state, newState);
+    },
     buy(state, { name, quantity, price }) {
       const asset = state.items.find(asset => asset.name === name);
 
