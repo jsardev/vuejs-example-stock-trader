@@ -2,10 +2,12 @@ import mutations from './mutations';
 import actions from './actions';
 
 import PersistenceNavItem from './components/PersistenceNavItem';
+import SaveModal from './components/SaveModal';
+import LoadModal from './components/LoadModal';
 
 const defaultState = {
-  items: [],
   load: {
+    items: [],
     inProgress: false,
     showModal: false
   },
@@ -22,4 +24,4 @@ const module = {
   actions
 };
 
-export { module as default, PersistenceNavItem };
+export { module as default, PersistenceNavItem, SaveModal, LoadModal };

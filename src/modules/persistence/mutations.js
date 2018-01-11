@@ -27,7 +27,7 @@ export default {
     state.load.inProgress = true;
   },
   loadEnd(state, data) {
-    state.items = data
+    state.load.items = data
       .map(item => ({
         ...item,
         timestamp: new Date(item.timestamp).toLocaleString()

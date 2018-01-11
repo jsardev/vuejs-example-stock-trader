@@ -11,7 +11,6 @@
                         div.tag.is-info.is-large {{ quantity }}
                     div.level-item(ref="price")
                         div.tag.is-success.is-large ${{ price }}
-                        //- TODO: add switching between success/danger based on previous value
         div.card-footer
             div.card-footer-item
                 div.control
