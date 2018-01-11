@@ -1,6 +1,6 @@
 <template lang="pug">
     div
-        app-header
+        navigation
         transition(name="fade" mode="out-in")
             router-view
         //- TODO: Move these modals somewhere else and add validation
@@ -10,12 +10,12 @@
                     div.field
                         label.label Save name
                         div.control
-                            input.input(v-model="saveName")
+                            input.input(v-model="saveName", v-focus="showSaveModal", @keydown.enter="save(saveName)")
                     div.field.is-grouped.is-grouped-right
                         div.control
                             button.button(@click="cancelSave") Cancel
                         div.control
-                            button.button.is-primary(:class="{ 'is-loading': isSaveInProgress }" @click="save(saveName)") Save
+                            button.button.is-primary(:class="{ 'is-loading': isSaveInProgress }", @click="save(saveName)") Save
         transition(name="fade" mode="out-in")
             modal(v-if="showLoadModal", :onClose="cancelLoad", :active="showLoadModal")
                 div.box
@@ -34,7 +34,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import Header from './components/Header.vue';
+import { Navigation } from './modules/app';
 import Modal from './components/Modal.vue';
 
 export default {
@@ -56,7 +56,7 @@ export default {
         cancelLoad: 'persistence/cancelLoad'
     }),
     components: {
-        appHeader: Header,
+        navigation: Navigation,
         modal: Modal
     }
 };
@@ -71,11 +71,11 @@ export default {
     opacity: 0;
 }
 .fade-enter-active {
-    transition: opacity 0.5s;
+    transition: opacity 0.3s;
 }
 
 .fade-leave-active {
-    transition: opacity 0.5s;
+    transition: opacity 0.3s;
     opacity: 0;
 }
 </style>

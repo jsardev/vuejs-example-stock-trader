@@ -1,6 +1,6 @@
-import Home from './components/Home.vue';
-import Portfolio from './components/Portfolio.vue';
-import Stocks from './components/Stocks.vue';
+import { Home } from './modules/app';
+import { Portfolio } from './modules/portfolio';
+import { Stocks } from './modules/stock';
 
 export default [
   { path: '/', component: Home },

@@ -2,6 +2,8 @@ import actions from './actions';
 import mutations from './mutations';
 import getters from './getters';
 
+import Stocks from './components/Stocks';
+
 const defaultState = {
   // TODO: replace this with generated data
   items: [
@@ -11,10 +13,12 @@ const defaultState = {
   ]
 };
 
-export default {
+const module = {
   namespaced: true,
   state: defaultState,
   mutations,
   getters,
   actions
 };
+
+export { module as default, Stocks };

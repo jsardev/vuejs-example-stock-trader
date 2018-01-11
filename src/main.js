@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 import App from './App.vue';
 
+import './directives';
 import routes from './routes';
 import store from './store';
 

@@ -1,3 +1,4 @@
+// TODO: add helper buttons
 <template lang="pug">
     div.section
         div.container
@@ -22,13 +23,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-import Asset from './Asset.vue';
-import actionTypes from './actionTypes';
+import Asset from '../../../components/Asset';
 
 export default {
     data() {
         return {
-            availableAction: actionTypes.SELL
+            availableAction: 'SELL'
         };
     },
     computed: {

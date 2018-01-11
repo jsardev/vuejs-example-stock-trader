@@ -36,7 +36,7 @@ import { mapState } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required, maxValue, minValue } from 'vuelidate/lib/validators';
 
-import actionTypes from './actionTypes';
+import actionTypes from '../constants/actionTypes';
 import money from '../filters/money';
 
 export default {

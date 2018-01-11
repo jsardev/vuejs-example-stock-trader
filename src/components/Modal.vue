@@ -1,5 +1,10 @@
 <template lang="pug">
-    div.modal(:class="{ 'is-active': active }")
+    div.modal(
+        :class="modalClasses", 
+        @keydown.esc="onClose",
+        v-focus="active"
+        tabindex="1"
+    )
         div.modal-background(@click="onClose")
         div.modal-content
             slot
@@ -7,10 +12,15 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-
 export default {
-    props: ['active', 'onClose']
+    props: ['active', 'onClose'],
+    computed: {
+        modalClasses() {
+            return {
+                'is-active': this.active
+            };
+        }
+    }
 };
 </script>
 
