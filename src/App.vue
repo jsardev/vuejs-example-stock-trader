@@ -21,3 +21,17 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.fade-enter {
+    opacity: 0;
+}
+.fade-enter-active {
+    transition: opacity 0.3s;
+}
+
+.fade-leave-active {
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+</style>
