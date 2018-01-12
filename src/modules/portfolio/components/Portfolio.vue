@@ -1,4 +1,3 @@
-// TODO: add helper buttons
 <template lang="pug">
     div.section
         div.container
