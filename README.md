@@ -33,6 +33,11 @@ npm run dev
 npm run build
 ```
 
+## Things to add
+
+* Testing
+* State transitions
+
 ## Contribution
 
 Feel free to contribute to this project in order to introduce better practices building `Vue.js` apps. Create an issue with a question/bug to discuss certain problems or just introduce a pull request right away!

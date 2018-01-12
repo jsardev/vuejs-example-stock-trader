@@ -5,7 +5,6 @@
                 div.level-left
                     div.level-item
                         h3.title.is-4 {{ name }}
-                div.level-right
                     div.level-item(v-if="quantity")
                         div.tag.is-info.is-large {{ quantity }}
                     div.level-item

@@ -72,7 +72,6 @@ if (process.env.NODE_ENV === 'production') {
       minimize: true
     }),
     new HtmlWebpackPlugin({
-      title: 'Stock Trader',
       template: 'src/App.html'
     }),
     new HtmlWebpackIncludeAssetsPlugin({
