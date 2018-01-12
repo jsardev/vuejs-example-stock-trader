@@ -1,16 +1,21 @@
 export default {
-  // TODO: handle this duplication
   generateData: ({ commit }) => commit('generate'),
   buy: ({ commit, dispatch, getters }, { name, quantity }) => {
-    const asset = getters.getByName(name);
+    const payload = {
+      ...getters.getByName(name),
+      quantity
+    };
 
-    dispatch('app/buy', { ...asset, quantity }, { root: true });
-    commit('portfolio/buy', { ...asset, quantity }, { root: true });
+    dispatch('app/buy', payload, { root: true });
+    commit('portfolio/buy', payload, { root: true });
   },
   sell: ({ commit, dispatch, getters }, { name, quantity }) => {
-    const asset = getters.getByName(name);
+    const payload = {
+      ...getters.getByName(name),
+      quantity
+    };
 
-    dispatch('app/sell', { ...asset, quantity }, { root: true });
-    commit('portfolio/sell', { ...asset, quantity }, { root: true });
+    dispatch('app/sell', payload, { root: true });
+    commit('portfolio/sell', payload, { root: true });
   }
 };

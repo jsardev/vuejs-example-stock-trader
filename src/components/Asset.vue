@@ -21,12 +21,13 @@
                         :class="quantityForActionClasses"
                         @keydown.enter="runAction"
                         tabindex="1"
+                        v-focus="true"
                     )
             div.card-footer-item
                 strong(:class="calculatedPriceClasses") ${{ calculatedPrice | money }}
             div.card-footer-item
                 button.button(
-                    tabindex="0"
+                    tabindex="2"
                     @click="runAction" 
                     :disabled="$v.$invalid"
                 ) {{ action | capitalize }}
