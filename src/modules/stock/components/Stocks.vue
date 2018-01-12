@@ -4,7 +4,7 @@
         div.container
             h2.title Stocks
             div.columns.is-multiline
-                div.column.is-one-third(v-for="asset in items")
+                div.column.is-half(v-for="asset in items")
                     asset(
                         :name="asset.name", 
                         :price="asset.price",

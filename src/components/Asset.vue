@@ -26,11 +26,13 @@
             div.card-footer-item
                 strong(:class="calculatedPriceClasses") ${{ calculatedPrice | money }}
             div.card-footer-item
-                button.button(
-                    tabindex="2"
-                    @click="runAction" 
-                    :disabled="$v.$invalid"
-                ) {{ action | capitalize }}
+                div.buttons
+                    button.button(@click="maxQuantity") Max
+                    button.button.is-info(
+                        tabindex="2"
+                        @click="runAction" 
+                        :disabled="$v.$invalid"
+                    ) {{ action | capitalize }}
 </template>
 
 <script>
@@ -109,6 +111,13 @@ export default {
                     name: this.name,
                     quantity: Number(this.quantityForAction)
                 });
+            }
+        },
+        maxQuantity() {
+            if (this.action === actions.BUY) {
+                this.quantityForAction = Math.floor(this.funds / this.price);
+            } else {
+                this.quantityForAction = this.quantity;
             }
         }
     },

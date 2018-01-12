@@ -10,7 +10,7 @@
                         router-link(to="/stocks") market.
             div(v-else)
                 div.columns
-                    div.column.is-one-third(v-for="asset in items")
+                    div.column.is-half(v-for="asset in items")
                         asset(
                             :name="asset.name", 
                             :quantity="asset.quantity", 
