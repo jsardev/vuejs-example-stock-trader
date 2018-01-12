@@ -70,18 +70,6 @@ export default {
                 : this.actionType == actionTypes.SELL ? 'Sell' : 'Action';
         }
     },
-    watch: {
-        // TODO: how to do this better?
-        price() {
-            this.$refs.price.classList.add('animated');
-            this.$refs.price.classList.add('shake');
-
-            setTimeout(() => {
-                this.$refs.price.classList.remove('animated');
-                this.$refs.price.classList.remove('shake');
-            }, 1000);
-        }
-    },
     filters: {
         money
     },
