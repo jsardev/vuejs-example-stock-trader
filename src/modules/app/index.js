@@ -5,13 +5,15 @@ import Home from './components/Home';
 import End from './components/End';
 import Navigation from './components/Navigation';
 import Goal from './components/Goal';
+import HelpModal from './components/HelpModal';
 
 const defaultState = {
   day: 1,
   funds: 10000,
   goal: 1000000,
   progress: 1,
-  finished: false
+  finished: false,
+  showHelpModal: false
 };
 
 const module = {
@@ -21,4 +23,4 @@ const module = {
   actions
 };
 
-export { module as default, Navigation, Home, Goal, End };
+export { module as default, Navigation, Home, Goal, End, HelpModal };

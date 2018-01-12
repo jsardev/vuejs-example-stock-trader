@@ -7,6 +7,7 @@
                 router-view
             save-modal
             load-modal
+            help-modal
         div(v-if="finished")
             end
             
@@ -15,7 +16,7 @@
 <script>
 import { mapState } from 'vuex';
 
-import { Navigation, Goal, End } from './modules/app';
+import { Navigation, Goal, End, HelpModal } from './modules/app';
 import { SaveModal, LoadModal } from './modules/persistence';
 
 export default {
@@ -25,7 +26,8 @@ export default {
         Goal,
         End,
         SaveModal,
-        LoadModal
+        LoadModal,
+        HelpModal
     }
 };
 </script>

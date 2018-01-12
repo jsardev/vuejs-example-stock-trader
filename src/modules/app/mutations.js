@@ -16,5 +16,11 @@ export default {
   },
   endday(state) {
     state.day++;
+  },
+  invokeHelpModal(state) {
+    state.showHelpModal = true;
+  },
+  revokeHelpModal(state) {
+    state.showHelpModal = false;
   }
 };

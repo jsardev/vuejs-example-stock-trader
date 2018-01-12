@@ -18,5 +18,7 @@ export default {
   endday: ({ commit }) => {
     commit('endday');
     commit('stock/endday', null, { root: true });
-  }
+  },
+  invokeHelpModal: ({ commit }) => commit('invokeHelpModal'),
+  revokeHelpModal: ({ commit }) => commit('revokeHelpModal')
 };

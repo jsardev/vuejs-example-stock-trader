@@ -6,7 +6,7 @@ import routes from './routes';
 import store from './store';
 
 import App from './App.vue';
-import { attachKeyboardShortcuts } from './utils';
+import utils from './utils';
 
 Vue.use(VueRouter);
 
@@ -22,6 +22,6 @@ new Vue({
   render: h => h(App),
   mounted() {
     const vm = this;
-    attachKeyboardShortcuts(vm);
+    utils.attachKeyboardShortcuts(vm);
   }
 });
