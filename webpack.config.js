@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/main.js',
@@ -80,6 +81,7 @@ if (process.env.NODE_ENV === 'production') {
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
       ],
       append: false
-    })
+    }),
+    new CopyWebpackPlugin([{ from: 'config/*', to: '[name].[ext]' }])
   ]);
 }
