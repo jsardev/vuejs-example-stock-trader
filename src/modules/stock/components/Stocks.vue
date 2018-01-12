@@ -7,9 +7,10 @@
                 div.column.is-one-third(v-for="asset in items")
                     asset(
                         :name="asset.name", 
-                        :price="asset.price", 
-                        :actionType="availableAction"
-                        :action="buy"
+                        :price="asset.price",
+                        :funds="funds"
+                        action="BUY"
+                        :onAction="buy"
                     )
 </template>
 
@@ -19,17 +20,11 @@ import { mapState, mapActions } from 'vuex';
 import Asset from '../../../components/Asset';
 
 export default {
-    data() {
-        return {
-            availableAction: 'BUY'
-        };
-    },
     computed: {
+        ...mapState('app', ['funds']),
         ...mapState('stock', ['items', 'initialized'])
     },
-    methods: {
-        ...mapActions('stock', ['buy', 'generateData'])
-    },
+    methods: mapActions('stock', ['buy', 'generateData']),
     components: {
         Asset
     },

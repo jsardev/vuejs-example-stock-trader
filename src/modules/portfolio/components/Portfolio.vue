@@ -15,8 +15,8 @@
                             :name="asset.name", 
                             :quantity="asset.quantity", 
                             :price="asset.price", 
-                            :actionType="availableAction"
-                            :action="sell"
+                            action="SELL"
+                            :onAction="sell"
                         )
 </template>
 
@@ -26,17 +26,8 @@ import { mapGetters, mapActions } from 'vuex';
 import Asset from '../../../components/Asset';
 
 export default {
-    data() {
-        return {
-            availableAction: 'SELL'
-        };
-    },
-    computed: {
-        ...mapGetters('portfolio', ['items'])
-    },
-    methods: {
-        ...mapActions('stock', ['sell'])
-    },
+    computed: mapGetters('portfolio', ['items']),
+    methods: mapActions('stock', ['sell']),
     components: {
         Asset
     }

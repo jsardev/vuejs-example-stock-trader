@@ -15,8 +15,8 @@ export default {
         ...mapState('app', ['funds', 'goal', 'progress']),
         progressClasses() {
             return {
-                'is-danger': this.progress <= 20,
-                'is-warning': this.progress >= 50,
+                'is-danger': this.progress <= 50,
+                'is-warning': this.progress > 50,
                 'is-success': this.progress >= 80
             };
         }

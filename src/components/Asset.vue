@@ -1,4 +1,3 @@
-// TODO: refactor it somehow, looks bad
 <template lang="pug">
     div.card
         div.card-content
@@ -9,25 +8,28 @@
                 div.level-right
                     div.level-item(v-if="quantity")
                         div.tag.is-info.is-large {{ quantity }}
-                    div.level-item(ref="price")
+                    div.level-item
                         div.tag.is-success.is-large ${{ price }}
         div.card-footer
             div.card-footer-item
                 div.control
                     input.input(
-                        type="text", 
+                        type="number",
                         placeholder="Quantity", 
                         v-model="quantityForAction",
                         @input="$v.quantityForAction.$touch",
-                        :class="{ 'is-danger': isInvalid }"
+                        :class="quantityForActionClasses"
+                        @keydown.enter="runAction"
+                        tabindex="1"
                     )
             div.card-footer-item
-                strong(:class="{ 'has-text-danger': isCalculatedPriceInvalid }") ${{ calculatedPrice | money }}
+                strong(:class="calculatedPriceClasses") ${{ calculatedPrice | money }}
             div.card-footer-item
                 button.button(
-                    @click="onAction" 
-                    :disabled="isInvalid"
-                ) {{ actionName }}
+                    tabindex="0"
+                    @click="runAction" 
+                    :disabled="$v.$invalid"
+                ) {{ action | capitalize }}
 </template>
 
 <script>
@@ -35,44 +37,16 @@ import { mapState } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required, maxValue, minValue } from 'vuelidate/lib/validators';
 
-import actionTypes from '../constants/actionTypes';
 import money from '../filters/money';
+import capitalize from '../filters/capitalize';
+
+const actions = {
+    BUY: 'BUY',
+    SELL: 'SELL'
+};
 
 export default {
     mixins: [validationMixin],
-    data() {
-        return {
-            quantityForAction: 1
-        };
-    },
-    computed: {
-        ...mapState({
-            funds: state => state.app.funds
-        }),
-        calculatedPrice() {
-            return Number(this.price * this.quantityForAction);
-        },
-        isInvalid() {
-            return this.isQuantityForActionInvalid || this.isCalculatedPriceInvalid;
-        },
-        isQuantityForActionInvalid() {
-            return this.$v.quantityForAction.$error;
-        },
-        isCalculatedPriceInvalid() {
-            if (this.actionType === actionTypes.SELL) {
-                return false;
-            }
-            return this.$v.calculatedPrice.$invalid;
-        },
-        actionName() {
-            return this.actionType == actionTypes.BUY
-                ? 'Buy'
-                : this.actionType == actionTypes.SELL ? 'Sell' : 'Action';
-        }
-    },
-    filters: {
-        money
-    },
     props: {
         name: {
             type: String,
@@ -82,34 +56,64 @@ export default {
             type: Number
         },
         price: {
+            type: Number,
+            required: true
+        },
+        funds: {
             type: Number
         },
-        actionType: {
+        action: {
             type: String,
             required: true
         },
-        action: {
+        onAction: {
             type: Function,
             required: true
         }
     },
+    data() {
+        return {
+            quantityForAction: 1
+        };
+    },
+    computed: {
+        calculatedPrice() {
+            return Number(this.price * this.quantityForAction);
+        },
+        calculatedPriceClasses() {
+            return {
+                'has-text-danger': this.$v.calculatedPrice && this.$v.calculatedPrice.$invalid
+            };
+        },
+        quantityForActionClasses() {
+            return {
+                'is-danger': this.$v.$invalid
+            };
+        }
+    },
+    filters: {
+        money,
+        capitalize
+    },
     methods: {
-        onAction() {
-            this.$v.quantityForAction.$touch();
+        runAction() {
+            if (!this.$v.$invalid) {
+                this.$v.quantityForAction.$touch();
 
-            if (this.actionType == actionTypes.BUY) {
-                this.$v.calculatedPrice.$touch();
+                if (this.$v.calculatedPrice) {
+                    this.$v.calculatedPrice.$touch();
+                }
+
+                this.onAction({
+                    name: this.name,
+                    quantity: Number(this.quantityForAction)
+                });
             }
-
-            this.action({
-                name: this.name,
-                quantity: Number(this.quantityForAction)
-            });
         }
     },
     validations() {
-        switch (this.actionType) {
-            case actionTypes.BUY:
+        switch (this.action) {
+            case actions.BUY:
                 return {
                     quantityForAction: {
                         required
@@ -118,7 +122,7 @@ export default {
                         maxValue: maxValue(this.funds)
                     }
                 };
-            case actionTypes.SELL:
+            case actions.SELL:
                 return {
                     quantityForAction: {
                         required,
