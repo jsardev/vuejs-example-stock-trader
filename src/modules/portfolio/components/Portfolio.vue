@@ -8,7 +8,7 @@
                         | You have no shares right now. Buy some on the 
                         router-link(to="/stocks") market.
             div(v-else)
-                div.columns
+                div.columns.is-multiline
                     div.column.is-half(v-for="asset in items")
                         asset(
                             :name="asset.name", 
